@@ -1,5 +1,6 @@
 import sys
 from Implementation import Operations
+from Validator import Validator
 
 def main():
     args = sys.argv[1:]
@@ -7,7 +8,7 @@ def main():
     file = args[0]
     operation = args[1]
 
-    obj = Operations(file, operation)
+    obj = Operations(file, operation, Validator())
 
     if operation == "add":
         obj.add_products()

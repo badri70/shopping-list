@@ -1,7 +1,10 @@
+from Validator import Validator
+
 class Operations:
-    def __init__(self, file_name, operation):
+    def __init__(self, file_name, operation, validator):
         self.file_name = file_name
         self.operation = operation
+        self.validator = validator
 
     def _read_lines(self):
         with open(self.file_name, 'r') as f:
@@ -10,12 +13,15 @@ class Operations:
 
     def add_products(self):
         products = input("Enter product: ")
+        self.validator.validate_name(products)
+
         price = input("Enter its price: ")
+        self.validator.validate_price(price)
 
         result = products.title() + "-" + price
 
         with open(self.file_name, 'a') as f:
-            f.write("\n" + result)
+            f.write(result + "\n")
 
     def total(self):
             lines = self._read_lines()
@@ -27,9 +33,11 @@ class Operations:
 
     def delete(self):
         product = input("Enter product: ")
-        product = product.title()
-        lines = self._read_lines()
+        self.validator.validate_name(product)
 
+        product = product.title()
+
+        lines = self._read_lines()
         with open(self.file_name, 'w') as f:
             for line in lines:
                 if product not in line:
@@ -37,8 +45,13 @@ class Operations:
 
     def update(self):
         product = input("Enter product: ")
+        self.validator.validate_name(product)
+
         price = input("Enter its price: ")
+        self.validator.validate_price(price)
+
         product = product.title()
+
         lines = self._read_lines()
 
         with open(self.file_name, 'w') as f:
