@@ -1,5 +1,3 @@
-from Validator import Validator
-
 class Operations:
     def __init__(self, file_name, operation, validator):
         self.file_name = file_name
