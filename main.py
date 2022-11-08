@@ -18,7 +18,7 @@ def main():
     elif operation == "total":
         obj.total()
     else:
-        print("Такой операции нет")
+        raise ValueError("Такой операции нет")
 
 
 if __name__ == "__main__":
